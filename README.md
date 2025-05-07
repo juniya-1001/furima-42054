@@ -17,7 +17,6 @@
 
 - has_many :items
 - has_many :orders
-- has_many :comments
 
 ## items テーブル
 
@@ -34,10 +33,8 @@
 
 ### Association
 
-- has_many :comments
+
 - has_one :order
-- has_one :credit
-- has_one :address
 - belongs_to :user
 - belongs_to :category
 - belongs_to :state
@@ -57,10 +54,9 @@
 | street              | string     | null: false |
 | building            | string     |             |
 | tel_number          | string     | null: false |
-| user                | references | null: false, foreign_key: true |
+| order               | references | null: false, foreign_key: true |
 
 ### Association
-- has_one   :item
 - belong_to :order
 
 ## orders モデル
@@ -69,7 +65,6 @@
 | ----------| -----------| ------------|
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
-| address   | references | null: false, foreign_key: true |
 
 
 ### Association
