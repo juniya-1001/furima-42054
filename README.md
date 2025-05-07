@@ -4,7 +4,7 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| name      　　　     | string | null: false |
+| name               | string | null: false |
 | email              | string | null: false unique: true|
 | encrypted_password | string | null: false |
 | last_name          | string | null: false |
@@ -16,21 +16,20 @@
 ### Association
 
 - has_many :items
-- has_one :orders
+- has_many :orders
 - has_many :comments
 
 ## items テーブル
 
 | Column              | Type       | Options     |
 | ------------------  | ------     | ----------- |
-| image               |            | null: false |
 | name                | string     | null: false |
 | description         | text       | null: false |
-| category_id         | integer    | null: false, foreign_key: true |
-| state_id        | integer    | null: false, foreign_key: true |
-| shipping_charge_id  | integer    | null: false, foreign_key: true |
-| shipping_area_id    | integer    | null: false, foreign_key: true |
-| shipping_day_id     | integer    | null: false, foreign_key: true |
+| category_id         | integer    | null: false |
+| state_id            | integer    | null: false |
+| shipping_charge_id  | integer    | null: false |
+| shipping_area_id    | integer    | null: false |
+| shipping_time_id    | integer    | null: false |
 | price               | integer    | null: false |
 
 ### Association
@@ -44,34 +43,25 @@
 - belongs_to :state
 - belongs_to :shipping_charge
 - belongs_to :shipping_area
-- belongs_to :shipping_day
+- belongs_to :shipping_time
 
 
-## credits テーブル
-
-| Column              | Type       | Options     |
-| ------------------  | ------     | ----------- |
-| encrypted_cord_num  | integer    | null: false |
-| encrypted_ex_date   | string     | null: false |
-| encrypted_cvc       | integer    | null: false |
-
-### Association
-
-- has_one :item
 
 ## addresses テーブル
 
 | Column              | Type       | Options     |
 | ------------------  | ------     | ----------- |
 | zipcode             | string     | null: false |
-| perfecter_id        | string     | null: false |
+| perfecter_id        | integer    | null: false |
 | city                | string     | null: false |
 | street              | string     | null: false |
 | building            | string     |             |
-| tel_number          | integer    | null: false |
+| tel_number          | string     | null: false |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
-- has_one :item
+- has_one   :item
+- belong_to :order
 
 ## orders モデル
 
@@ -79,11 +69,14 @@
 | ----------| -----------| ------------|
 | user      | references | null: false, foreign_key: true |
 | item      | references | null: false, foreign_key: true |
+| address   | references | null: false, foreign_key: true |
 
 
 ### Association
-- has_one :user
-- has_one :item
+- belong_to :user
+- belong_to :item
+- has_one   :address
+
 
 ## comments テーブル
 
