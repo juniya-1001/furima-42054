@@ -4,12 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
-  validates :email, presence: true
-  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}\z/ }
-  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
-  validates :kana_last_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
-  validates :kana_first_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
-  validates :birthday, presence: true
+  validates :name, presence: { message: "can't be blank" }
+  validates :email, presence: { message: "can't be blank" }
+  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,}\z/, message: 'is invalid' }
+  validates :last_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/, message: 'is invalid' }
+  validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/, message: 'is invalid' }
+  validates :kana_last_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid' }
+  validates :kana_first_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: 'is invalid' }
+  validates :birthday, presence: { message: "can't be blank" }
 end
