@@ -5,14 +5,22 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-
   end
+
+  def create
+    def create
+      @item = Item.new(item_params)
+      if @prototype.save
+      redirect_to '/'
+      else
+        render :new, status: :unprocessable_entity
+      end
+    end
 
 
 
   private
 
   def item_params
-    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
-  end
+    params.require(:item).permit(:image,:name, :description, :user, :image).merge(user_id: current_user.id)  end
 end
