@@ -21,3 +21,4 @@ function post (){
  };
  
  window.addEventListener('turbo:render', post);
+ window.addEventListener('turbo:load', post);
