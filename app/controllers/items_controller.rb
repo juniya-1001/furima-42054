@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to root_path
+      redirect_to item_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -41,14 +41,13 @@ class ItemsController < ApplicationController
                                  :shipping_time_id, :price).merge(user_id: current_user.id)
   end
 
-  def move_to_index
+  def set_item
     @item = Item.find(params[:id])
+  end
+
+  def move_to_index
     return if @item.user.id == current_user.id
 
     redirect_to action: :index
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
   end
 end
