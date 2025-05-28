@@ -50,7 +50,7 @@
 | Column              | Type       | Options     |
 | ------------------  | ------     | ----------- |
 | zipcode             | string     | null: false |
-| perfecter_id        | integer    | null: false |
+| prefecture_id        | integer    | null: false |
 | city                | string     | null: false |
 | street              | string     | null: false |
 | building            | string     |             |
@@ -60,7 +60,7 @@
 ### Association
 - belong_to :order
 
-## orders モデル
+## orders テーブル
 
 | Column    | Type       | Options     |
 | ----------| -----------| ------------|
