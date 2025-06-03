@@ -15,8 +15,6 @@ class OrderAddress
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
-    # 住所を保存する
-    # donation_idには、変数donationのidと指定する
     Address.create(zipcode: zipcode, prefecture_id: prefecture_id, city: city, street: street, building: building, tel_number: tel_number,
                    order_id: order.id)
   end
