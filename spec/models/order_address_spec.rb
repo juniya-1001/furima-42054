@@ -54,7 +54,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
 
-      it 'zipcodeが半角以外数字以外の場合は保存できないこと' do
+      it 'zipcodeが「3桁ハイフン4桁」の半角文字列以外の場合は保存できないこと' do
         @order_address.zipcode = 'あいうえお１２３'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Zipcode is invalid. Include hyphen(-)')
