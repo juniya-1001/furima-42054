@@ -54,6 +54,17 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
 
+      it 'user_idが空では保存できないこと' do
+        @order_address.user_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空では保存できないこと' do
+        @order_address.item_id = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
+      end
+
       it 'zipcodeが「3桁ハイフン4桁」の半角文字列以外の場合は保存できないこと' do
         @order_address.zipcode = 'あいうえお１２３'
         @order_address.valid?
@@ -61,6 +72,17 @@ RSpec.describe OrderAddress, type: :model do
       end
       it 'tel_numberが半角以外数字以外の場合は保存できないこと' do
         @order_address.tel_number = 'あいうえお'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Tel number must be 10 or 11 digits without hyphens')
+      end
+      it 'tel_numberが9桁以下では保存できないこと' do
+        @order_address.tel_number = '090123456'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Tel number must be 10 or 11 digits without hyphens')
+      end
+
+      it 'tel_numberが12桁以上では保存できないこと' do
+        @order_address.tel_number = '090123456789'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Tel number must be 10 or 11 digits without hyphens')
       end
