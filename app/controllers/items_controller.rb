@@ -51,8 +51,10 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return unless @item.user.id == current_user.id || @item.order.present?
-
-    redirect_to root_path
+    if @item.user.id == current_user.id || @item.order.present?
+      render :edit
+    else
+      redirect_to root_path
+    end
   end
 end
